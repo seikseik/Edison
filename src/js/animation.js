@@ -79,30 +79,6 @@ arrow.addEventListener("click", function(){
     });
   });
 
-  // fade circles
-  ScrollTrigger.batch(".circle", {
-    onEnter: elements => {
-      gsap.from(elements, {
-        autoAlpha: 0,
-        stagger: 0.15,
-        duration: 1
-      });
-    },
-    once: true
-  });
-
-
-// zoom
-  const zoom = gsap.utils.toArray("[img-zoom]");
-  zoom.forEach((el, i) => {
-    const anim = gsap.fromTo(el, {scale: 1}, {scale: 1.05, duration: 2.5, delay: 0.2});
-    ScrollTrigger.create({
-      trigger: el,
-      animation: anim,
-      toggleActions: 'play none none none',
-      once: true,
-    });
-  });
 
 
   // hr line animation
@@ -118,77 +94,3 @@ arrow.addEventListener("click", function(){
       once: true,
     });
   });
-
-  const hrcenter = gsap.utils.toArray(".hr-line");
-  hrcenter.forEach((el, i) => {
-    gsap.set(el, {transformOrigin:"center"})
-    const anim = gsap.fromTo(el, {scaleX: 0}, {duration: 1, scaleX: 1});
-    ScrollTrigger.create({
-      trigger: el,
-      animation: anim,
-      ease: "circ.out",
-      toggleActions: 'play none none none',
-      once: true,
-    });
-  });
-
-  gsap.set(".hr-left", {transformOrigin:"right"})
-  const hrLeft = gsap.fromTo(".hr-left", {scaleX: 0}, {duration: 1, scaleX: 1});
-  ScrollTrigger.create({
-    trigger: ".hr-left",
-    animation: hrLeft,
-    ease: "circ.out",
-    toggleActions: 'play none none none',
-    once: true,
-  });
-  gsap.set(".hr-right", {transformOrigin:"left"})
-  const hrRight = gsap.fromTo(".hr-right", {scaleX: 0}, {duration: 1, scaleX: 1});
-  ScrollTrigger.create({
-    trigger: ".hr-right",
-    animation: hrRight,
-    ease: "circ.out",
-    toggleActions: 'play none none none',
-    once: true,
-  });
-  // swiper scroll
-let swipers = document.querySelectorAll(".swiper-scroll-container")
-
-swipers.forEach((item, i) => {
-  const swiper = new Swiper(item, {
-    speed: 200,
-    spaceBetween: 15,
-    slidesPerView: 1,
-    breakpoints: {
-      768: {
-        slidesPerView: 3
-      }
-
-    },
-    freeMode: true,
-    grabCursor: true,
-    navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-    },
-    scrollbar: {
-      el: '.swiper-scrollbar',
-      draggable: true,
-    },
-
-});
-});
-
-// mappa
-let numbers = document.querySelectorAll(".number");
-numbers.forEach((item, i) => {
-  item.addEventListener("click", function(){
-    let id = item.id
-    let overlay = document.querySelector(`[${id}]`);
-    overlay.style.opacity = 1;
-    overlay.style.visibility = "visible";
-    overlay.onclick = function(){
-      overlay.style.opacity = 0;
-      overlay.style.visibility = "hidden";
-    }
-  })
-});
