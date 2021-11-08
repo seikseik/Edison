@@ -63,8 +63,8 @@ $main-title: 48px;
 $title: 42px;
 $text-small: 16px;
 $text: 20px;
-$quote: 40px;
-
+$quote: 28px;
+$maxW: 1300px;
 @mixin main-title{
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 700;
@@ -118,17 +118,21 @@ body{
   line-height: 1.3;
   @include text;
   overflow-x: hidden;
+  &.modal-active {
+    overflow: hidden;
+  }
 }
 .page-width{
   padding: 0 $page-width;
 }
+
 // desktop
 
 .hero{
   display: flex;
   height: 100vh;
-  &.black{
-    background: black;
+  background: black;
+  transition: background .4s ease;
     h6{
       color: white;
     }
@@ -145,7 +149,6 @@ body{
       color:white;
       border-bottom-color: $red !important;
     }
-  }
   &.red{
     background: $red;
     h6{
@@ -172,6 +175,7 @@ body{
       height: 100%;
       display: flex;
       flex-direction: column;
+      max-width: $maxW/2;
       justify-content: center;
       h6{
         text-transform: uppercase;
@@ -210,7 +214,7 @@ body{
   .intro-text-container{
     height: 100%;
     width:80%;
-    max-width: 700px;
+    max-width: $maxW/2;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -244,8 +248,8 @@ body{
 .quote-module{
   padding: $page-width/2 0;
   .quote-container{
-    width:80%;
-    max-width: 800px;
+    width:100%;
+    max-width: $maxW/2;
     margin: 0 auto;
     h2{
       @include quote;
@@ -274,8 +278,10 @@ body{
 
 .text-section{
   padding: 0 $page-width;
+  margin: 0 auto;
   margin-top: $spacing*10;
   display: flex;
+  max-width: $maxW;
   &.left{
     flex-direction:row-reverse;
   }
@@ -300,6 +306,8 @@ body{
   .nav-container{
     padding: 0 $page-width;
     display: flex;
+    max-width: $maxW;
+    margin: 0 auto;
     .card{
       &:first-child{margin-right: $spacing;}
       &:last-child{margin-left: $spacing;}
@@ -355,11 +363,213 @@ body{
 }
 
 
+// MODAL
+
+
+.modal-container {
+  position:fixed;
+  height:100vh;
+  width:100%;
+  top:0;
+  background: $red;
+  left:0;
+  z-index:1;
+  overflow-y: scroll;
+  opacity: 0;
+  visibility: hidden;
+  &.three {
+    z-index:0;
+    opacity: 1;
+    visibility: visible;
+    .modal-background {
+      .modal {
+        animation: moveUp .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      }
+    }
+    + .content {
+      z-index:1;
+      animation: slideUpLarge .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    }
+    &.out {
+      .modal-background {
+        .modal {
+          animation: moveDown .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+        }
+      }
+      + .content {
+        animation: slideDownLarge .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+      }
+    }
+  }
+
+  .modal-background {
+    background:$red;
+    .modal {
+      padding: $page-width;
+      .modal-hero{
+        width:60%;
+        background: white;
+        padding: $spacing*5 $spacing*3;
+        padding-bottom: $spacing*4;
+        border-top-right-radius: 20px;
+        margin-bottom: $spacing*10;
+        @include shadow;
+        border:1px solid black;
+        max-width: 800px;
+        .modal-label{
+          background: $red;
+          width: fit-content;
+          @include label;
+          color:white;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          font-size: 10px;
+          padding: 2px 15px;
+        }
+        h1{
+          @include main-title;
+          color: $red;
+          margin: $spacing*3 0;
+        }
+      }
+      .text-section-hero{
+        display: flex;
+        margin-bottom: $spacing*10;
+      &.right{
+        flex-direction: row-reverse;
+        .col-text{
+          margin-right: 0;
+          margin-left: $spacing*2;
+        }
+      }
+        .col-text{
+          width:60%;
+          background: white;
+          padding: $spacing*5 $spacing*3;
+          padding-bottom: $spacing*4;
+          border-top-right-radius: 20px;
+          @include shadow;
+          border:1px solid black;
+          max-width: 800px;
+          margin-right: $spacing*2;
+        }
+        .col-image{
+          width:40%;
+          display: flex;
+          flex-direction: column;
+          padding-top: $spacing*5;
+          .caption{
+            display: flex;
+            .cap-text{
+              padding: $spacing*2;
+              background: white;
+              border-radius: 5px;
+              border-top-right-radius: 20px;
+              @include shadow;
+              width:80%;
+              border: 1px solid black;
+              color:red;
+              font-size: $text-small;
+              font-weight: 500;
+              margin-left: $spacing*2;
+            }
+          }
+          .image-container{
+            height: 100%;
+            width:100%;
+            background: white;
+            @include shadow;
+            border: 1px solid black;
+            margin-top: $spacing*2;
+          }
+        }
+      }
+    }
+  }
+}
+nav{
+  .nav-container{
+    position: fixed;
+    bottom:0px;
+    background: white;
+    width:100%;
+    padding: 12px $spacing*4;
+    display: flex;
+    @include shadow;
+    .prev{
+      flex:1;
+      svg{
+        cursor: pointer;
+      }
+      &.disabled{
+        opacity: .5;
+      }
+    }
+    .close{
+      flex:1;
+      text-align: center;
+      svg{
+        cursor: pointer;
+      }
+    }
+    .next{
+      flex:1;
+      text-align: right;
+      svg{
+        cursor: pointer;
+      }
+      &.disabled{
+        opacity: .5;
+      }
+    }
+  }
+}
+
+@keyframes slideUpLarge {
+  0% {
+    transform:translateY(0%);
+  }
+  100% {
+    transform:translateY(-100%);
+  }
+}
+
+@keyframes slideDownLarge {
+  0% {
+    transform:translateY(-100%);
+  }
+  100% {
+    transform:translateY(0%);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform:translateY(150px);
+  }
+  100% {
+    transform:translateY(0);
+  }
+}
+
+@keyframes moveDown {
+  0% {
+    transform:translateY(0px);
+  }
+  100% {
+    transform:translateY(150px);
+  }
+}
+
+
+
 footer{
   background: black;
   color:white;
   a{color:white;}
   .footer-container{
+    max-width: $maxW;
+    margin: 0 auto;
     padding: $page-width*2 $page-width;
     display: flex;
     flex-wrap: wrap;
@@ -368,12 +578,16 @@ footer{
       flex-direction: column;
       font-size: 12px;
       font-weight: 400;
+
     }
     .col-1{
       flex: 3;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      li{&:hover{
+        svg, path{fill: $red;}
+      }}
       img{
         width:100%;
         height: auto;

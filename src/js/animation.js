@@ -2,95 +2,165 @@ import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import lozad from 'lozad'
+import Typed from 'typed.js';
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 
 
 
 // scroll top
-let topArrow = document.querySelector(".arrow-top");
-topArrow.addEventListener("click", function(){
-  gsap.to(window, {duration: 2, scrollTo: 0});
-});
-
-let h = document.querySelector(".hero").offsetHeight;
-let arrow = document.querySelector(".arrow");
-arrow.addEventListener("click", function(){
-  gsap.to(window, {duration: 0.7, scrollTo: h});
-});
+// let topArrow = document.querySelector(".arrow-top");
+// topArrow.addEventListener("click", function(){
+//   gsap.to(window, {duration: 2, scrollTo: 0});
+// });
+//
+// let h = document.querySelector(".hero").offsetHeight;
+// let arrow = document.querySelector(".arrow");
+// arrow.addEventListener("click", function(){
+//   gsap.to(window, {duration: 0.7, scrollTo: h});
+// });
 
   // animate text on scroll
+  //
+  // const quotes = document.querySelectorAll(".animation-text");
+  // const timing = [ 0.3, 0.4, 0.4, 0.4];
+  // const stagger = [ 0.01, 0.02, 0.02, 0.02];
+  // function setupSplits() {
+  //   quotes.forEach((quote, i) => {
+  //
+  //     if(quote.anim) {
+  //       quote.anim.progress(1).kill();
+  //       quote.split.revert();
+  //     }
+  //
+  //     quote.split = new SplitText(quote, {
+  //       type:"words,chars",
+  //       wordsClass: "split-line"
+  //     });
+  //
+  //     quote.anim = gsap.from(quote.split.chars, {
+  //       scrollTrigger: {
+  //         trigger: quote,
+  //         start: "top 75%",
+  //       },
+  //       duration: timing[i],
+  //       ease: "circ.out",
+  //       y: 80,
+  //       stagger: stagger[i]
+  //     });
+  //   });
+  // }
+  //
+  //
+  // ScrollTrigger.addEventListener("refresh", setupSplits);
+  // setupSplits();
+  //
+  //
+  // // fade in
+  //
+  // const fade = gsap.utils.toArray("[fade]");
+  // fade.forEach((el, i) => {
+  //   const anim = gsap.fromTo(el, {autoAlpha: 0}, {duration: 1, autoAlpha: 1});
+  //   ScrollTrigger.create({
+  //     trigger: el,
+  //     animation: anim,
+  //     toggleActions: 'play none none none',
+  //     once: true,
+  //   });
+  // });
+  // const fadeUp = gsap.utils.toArray("[fade-up]");
+  // fadeUp.forEach((el, i) => {
+  //   const anim = gsap.fromTo(el, {autoAlpha: 0, y: -100}, {duration: 1, autoAlpha: 1, y: 0});
+  //   ScrollTrigger.create({
+  //     trigger: el,
+  //     animation: anim,
+  //     toggleActions: 'play none none none',
+  //     once: true,
+  //   });
+  // });
+  //
+  //
+  //
+  // // hr line animation
+  // const hr = gsap.utils.toArray(".vertical-line-hr");
+  // hr.forEach((el, i) => {
+  //   gsap.set(el, {transformOrigin:"top"})
+  //   const anim = gsap.fromTo(el, {scaleY: 0}, {duration: 2, scaleY: 1});
+  //   ScrollTrigger.create({
+  //     trigger: el,
+  //     animation: anim,
+  //     ease: "circ.out",
+  //     toggleActions: 'play none none none',
+  //     once: true,
+  //   });
+  // });
 
-  const quotes = document.querySelectorAll(".animation-text");
-  const timing = [ 0.3, 0.4, 0.4, 0.4];
-  const stagger = [ 0.01, 0.02, 0.02, 0.02];
-  function setupSplits() {
-    quotes.forEach((quote, i) => {
+// type
+let hero = document.querySelector(".hero")
+let options = {
+  strings: ["è quì",
+ "è in mezzo a noi"],
+	typeSpeed: 60,
+	startDelay: 700,
+	backSpeed: 60,
+	backDelay: 4000,
+	loop: true,
+	showCursor: false,
+  onStringTyped: (self) => {hero.classList.toggle("red")},
+};
 
-      if(quote.anim) {
-        quote.anim.progress(1).kill();
-        quote.split.revert();
+let typed = new Typed('.type', options);
+
+
+// modale
+
+let buttons = document.querySelectorAll(".modal-btn");
+let modali = document.querySelectorAll(".modal-container");
+
+let body = document.querySelector("body");
+
+buttons.forEach((item, i) => {
+  item.addEventListener("click", function(){
+    let id = item.id;
+    let modale = document.querySelector(`[${id}]`);
+    modale.classList.add("three");
+    body.style.overflow = "hidden"
+  })
+});
+
+modali.forEach((item, i) => {
+  let prev = item.querySelectorAll(".prev");
+  let close = item.querySelectorAll(".close");
+  let next = item.querySelectorAll(".next");
+    prev.forEach((a, i) => {
+      if(!a.classList.contains("disabled")){
+        a.addEventListener("click", function(){
+          let oldModal = document.querySelector(".three");
+          oldModal.classList.remove("three");
+          let id = `scheda${a.id}`;
+          let newModal = document.querySelector(`[${id}]`);
+          newModal.classList.add("three");
+        })
       }
-
-      quote.split = new SplitText(quote, {
-        type:"words,chars",
-        wordsClass: "split-line"
-      });
-
-      quote.anim = gsap.from(quote.split.chars, {
-        scrollTrigger: {
-          trigger: quote,
-          start: "top 75%",
-        },
-        duration: timing[i],
-        ease: "circ.out",
-        y: 80,
-        stagger: stagger[i]
-      });
     });
-  }
-
-
-  ScrollTrigger.addEventListener("refresh", setupSplits);
-  setupSplits();
-
-
-  // fade in
-
-  const fade = gsap.utils.toArray("[fade]");
-  fade.forEach((el, i) => {
-    const anim = gsap.fromTo(el, {autoAlpha: 0}, {duration: 1, autoAlpha: 1});
-    ScrollTrigger.create({
-      trigger: el,
-      animation: anim,
-      toggleActions: 'play none none none',
-      once: true,
+    next.forEach((b, i) => {
+      if(!b.classList.contains("disabled")){
+        b.addEventListener("click", function(){
+          let oldModal = document.querySelector(".three");
+          oldModal.classList.remove("three");
+          let id = `scheda${b.id}`;
+          let newModal = document.querySelector(`[${id}]`);
+          newModal.classList.remove("out");
+          newModal.classList.add("three");
+        })
+      }
     });
-  });
-  const fadeUp = gsap.utils.toArray("[fade-up]");
-  fadeUp.forEach((el, i) => {
-    const anim = gsap.fromTo(el, {autoAlpha: 0, y: -100}, {duration: 1, autoAlpha: 1, y: 0});
-    ScrollTrigger.create({
-      trigger: el,
-      animation: anim,
-      toggleActions: 'play none none none',
-      once: true,
+    close.forEach((c, i) => {
+      c.addEventListener("click",function(){
+        let oldModal = document.querySelector(".three");
+        oldModal.classList.remove("three");
+        body.style.overflow = "auto"
+      })
     });
-  });
 
-
-
-  // hr line animation
-  const hr = gsap.utils.toArray(".vertical-line-hr");
-  hr.forEach((el, i) => {
-    gsap.set(el, {transformOrigin:"top"})
-    const anim = gsap.fromTo(el, {scaleY: 0}, {duration: 2, scaleY: 1});
-    ScrollTrigger.create({
-      trigger: el,
-      animation: anim,
-      ease: "circ.out",
-      toggleActions: 'play none none none',
-      once: true,
-    });
-  });
+});
