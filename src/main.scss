@@ -228,17 +228,17 @@ body{
 }
 
 // hero
-.page-container{
-  background: white;
-  z-index: 2;
-  @include shadow;
-}
+// .page-container{
+//   background: white;
+//   z-index: 2;
+//   @include shadow;
+// }
 
 .hero{
   display: flex;
-  position: sticky;
+  // position: sticky;
   top:0;
-  z-index: -2;
+  // z-index: -2;
   height: 100vh;
   background: black;
   transition: background .4s ease;
@@ -599,8 +599,7 @@ body{
         border-top:1px solid black;
         cursor: pointer;
         &:hover{
-          color:white;
-          background: black;
+          background: $red;
         }
 
       }
@@ -879,5 +878,44 @@ footer{
 
 @media only screen and (max-width: 768px) {
 
+.modal-navigation{
+  .nav-container{
+    flex-wrap: wrap;
+  }
+}
+.hero{
+  .hero-right{display: none;}
+  .hero-left{
+    width:100%;
+  }
+}
+
+.intro-section{
+  .intro-text-container{
+    width:100%;
+    padding: 0 $page-width;
+    .intro-sommario{
+      width:100%;
+    }
+  }
+}
+
+.text-section{
+  flex-direction: column;
+  &.right{
+    flex-direction: column-reverse;
+  }
+  .col-image{
+    width:100%;
+  }
+  .col-text{
+    width:100%;
+    .text-container{
+      box-shadow: none;
+      border: none;
+      padding: 0;
+    }
+  }
+}
 
 }

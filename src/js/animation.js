@@ -55,10 +55,10 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
   let options = {
     strings: ["è quì",
    "è in mezzo a noi"],
-  	typeSpeed: 60,
-  	startDelay: 700,
-  	backSpeed: 60,
-  	backDelay: 4000,
+  	typeSpeed: 50,
+  	startDelay: 300,
+  	backSpeed: 30,
+  	backDelay: 2000,
   	loop: true,
   	showCursor: false,
   };
@@ -118,65 +118,24 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
   });
 
 
-  // menu
-  // menu
+  const fadeUp = gsap.utils.toArray("[fade-up]");
+  fadeUp.forEach((el, i) => {
+    const anim = gsap.fromTo(el, {autoAlpha: 0, y: 50}, {duration: 1, autoAlpha: 1, y: 0});
+    ScrollTrigger.create({
+      trigger: el,
+      animation: anim,
+      toggleActions: 'play none none none',
+      once: true,
+    });
+  });
 
-
-
-
-  // scroll top
-  // let topArrow = document.querySelector(".arrow-top");
-  // topArrow.addEventListener("click", function(){
-  //   gsap.to(window, {duration: 2, scrollTo: 0});
-  // });
-  //
-  // let h = document.querySelector(".hero").offsetHeight;
-  // let arrow = document.querySelector(".arrow");
-  // arrow.addEventListener("click", function(){
-  //   gsap.to(window, {duration: 0.7, scrollTo: h});
-  // });
-
-  //
-  //
-  // ScrollTrigger.addEventListener("refresh", setupSplits);
-  // setupSplits();
-  //
-  //
-  // // fade in
-  //
-  // const fade = gsap.utils.toArray("[fade]");
-  // fade.forEach((el, i) => {
-  //   const anim = gsap.fromTo(el, {autoAlpha: 0}, {duration: 1, autoAlpha: 1});
-  //   ScrollTrigger.create({
-  //     trigger: el,
-  //     animation: anim,
-  //     toggleActions: 'play none none none',
-  //     once: true,
-  //   });
-  // });
-  // const fadeUp = gsap.utils.toArray("[fade-up]");
-  // fadeUp.forEach((el, i) => {
-  //   const anim = gsap.fromTo(el, {autoAlpha: 0, y: -100}, {duration: 1, autoAlpha: 1, y: 0});
-  //   ScrollTrigger.create({
-  //     trigger: el,
-  //     animation: anim,
-  //     toggleActions: 'play none none none',
-  //     once: true,
-  //   });
-  // });
-  //
-  //
-  //
-  // // hr line animation
-  // const hr = gsap.utils.toArray(".vertical-line-hr");
-  // hr.forEach((el, i) => {
-  //   gsap.set(el, {transformOrigin:"top"})
-  //   const anim = gsap.fromTo(el, {scaleY: 0}, {duration: 2, scaleY: 1});
-  //   ScrollTrigger.create({
-  //     trigger: el,
-  //     animation: anim,
-  //     ease: "circ.out",
-  //     toggleActions: 'play none none none',
-  //     once: true,
-  //   });
-  // });
+  const fade = gsap.utils.toArray("[fade]");
+  fade.forEach((el, i) => {
+    const anim = gsap.fromTo(el, {autoAlpha: 0}, {duration: 1, autoAlpha: 1});
+    ScrollTrigger.create({
+      trigger: el,
+      animation: anim,
+      toggleActions: 'play none none none',
+      once: true,
+    });
+  });
