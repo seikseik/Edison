@@ -8,48 +8,134 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 
 
 
-// scroll top
-// let topArrow = document.querySelector(".arrow-top");
-// topArrow.addEventListener("click", function(){
-//   gsap.to(window, {duration: 2, scrollTo: 0});
-// });
-//
+
+
 // let h = document.querySelector(".hero").offsetHeight;
-// let arrow = document.querySelector(".arrow");
-// arrow.addEventListener("click", function(){
+// let topArrow = document.querySelector(".hero");
+// topArrow.addEventListener("click", function(){
+//   body.classList.remove("open")
 //   gsap.to(window, {duration: 0.7, scrollTo: h});
 // });
 
+
   // animate text on scroll
   //
-  // const quotes = document.querySelectorAll(".animation-text");
-  // const timing = [ 0.3, 0.4, 0.4, 0.4];
-  // const stagger = [ 0.01, 0.02, 0.02, 0.02];
-  // function setupSplits() {
-  //   quotes.forEach((quote, i) => {
+  const quotes = document.querySelectorAll(".animation-text");
+  const timing = [ 0.3, 0.4, 0.4, 0.4];
+  const stagger = [ 0.01, 0.02, 0.02, 0.02];
+  function setupSplits() {
+    quotes.forEach((quote, i) => {
+
+      if(quote.anim) {
+        quote.anim.progress(1).kill();
+        quote.split.revert();
+      }
+
+      quote.split = new SplitText(quote, {
+        type:"words,chars",
+        wordsClass: "split-line"
+      });
+
+      quote.anim = gsap.from(quote.split.chars, {
+        scrollTrigger: {
+          trigger: quote,
+          start: "top 75%",
+        },
+        duration: timing[i],
+        ease: "circ.out",
+        y: 80,
+        stagger: stagger[i]
+      });
+    });
+  }
+
+
+  // type
+  let hero = document.querySelector(".hero")
+  let options = {
+    strings: ["è quì",
+   "è in mezzo a noi"],
+  	typeSpeed: 60,
+  	startDelay: 700,
+  	backSpeed: 60,
+  	backDelay: 4000,
+  	loop: true,
+  	showCursor: false,
+  };
+
+  let typed = new Typed('.type', options);
+
+  // modale
+  let buttons = document.querySelectorAll(".modal-btn");
+  let modali = document.querySelectorAll(".modal-container");
+
+  let body = document.querySelector("body");
+
+  buttons.forEach((item, i) => {
+    item.addEventListener("click", function(){
+      let id = item.id;
+      let modale = document.querySelector(`[${id}]`);
+      modale.classList.add("three");
+      body.style.overflow = "hidden"
+    })
+  });
+
+  modali.forEach((item, i) => {
+    let prev = item.querySelectorAll(".prev");
+    let close = item.querySelectorAll(".close");
+    let next = item.querySelectorAll(".next");
+      prev.forEach((a, i) => {
+        if(!a.classList.contains("disabled")){
+          a.addEventListener("click", function(){
+            let oldModal = document.querySelector(".three");
+            oldModal.classList.remove("three");
+            let id = `scheda${a.id}`;
+            let newModal = document.querySelector(`[${id}]`);
+            newModal.classList.add("three");
+          })
+        }
+      });
+      next.forEach((b, i) => {
+        if(!b.classList.contains("disabled")){
+          b.addEventListener("click", function(){
+            let oldModal = document.querySelector(".three");
+            oldModal.classList.remove("three");
+            let id = `scheda${b.id}`;
+            let newModal = document.querySelector(`[${id}]`);
+            newModal.classList.remove("out");
+            newModal.classList.add("three");
+          })
+        }
+      });
+      close.forEach((c, i) => {
+        c.addEventListener("click",function(){
+          let oldModal = document.querySelector(".three");
+          oldModal.classList.remove("three");
+          body.style.overflow = "auto"
+        })
+      });
+
+  });
+
+
+  // menu
+  // menu
+
+
+
+
+  // scroll top
+  // let topArrow = document.querySelector(".arrow-top");
+  // topArrow.addEventListener("click", function(){
+  //   gsap.to(window, {duration: 2, scrollTo: 0});
+  // });
   //
-  //     if(quote.anim) {
-  //       quote.anim.progress(1).kill();
-  //       quote.split.revert();
-  //     }
-  //
-  //     quote.split = new SplitText(quote, {
-  //       type:"words,chars",
-  //       wordsClass: "split-line"
-  //     });
-  //
-  //     quote.anim = gsap.from(quote.split.chars, {
-  //       scrollTrigger: {
-  //         trigger: quote,
-  //         start: "top 75%",
-  //       },
-  //       duration: timing[i],
-  //       ease: "circ.out",
-  //       y: 80,
-  //       stagger: stagger[i]
-  //     });
-  //   });
-  // }
+  // let h = document.querySelector(".hero").offsetHeight;
+  // let arrow = document.querySelector(".arrow");
+  // arrow.addEventListener("click", function(){
+  //   gsap.to(window, {duration: 0.7, scrollTo: h});
+  // });
+
   //
   //
   // ScrollTrigger.addEventListener("refresh", setupSplits);
@@ -94,73 +180,3 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
   //     once: true,
   //   });
   // });
-
-// type
-let hero = document.querySelector(".hero")
-let options = {
-  strings: ["è quì",
- "è in mezzo a noi"],
-	typeSpeed: 60,
-	startDelay: 700,
-	backSpeed: 60,
-	backDelay: 4000,
-	loop: true,
-	showCursor: false,
-  onStringTyped: (self) => {hero.classList.toggle("red")},
-};
-
-let typed = new Typed('.type', options);
-
-
-// modale
-
-let buttons = document.querySelectorAll(".modal-btn");
-let modali = document.querySelectorAll(".modal-container");
-
-let body = document.querySelector("body");
-
-buttons.forEach((item, i) => {
-  item.addEventListener("click", function(){
-    let id = item.id;
-    let modale = document.querySelector(`[${id}]`);
-    modale.classList.add("three");
-    body.style.overflow = "hidden"
-  })
-});
-
-modali.forEach((item, i) => {
-  let prev = item.querySelectorAll(".prev");
-  let close = item.querySelectorAll(".close");
-  let next = item.querySelectorAll(".next");
-    prev.forEach((a, i) => {
-      if(!a.classList.contains("disabled")){
-        a.addEventListener("click", function(){
-          let oldModal = document.querySelector(".three");
-          oldModal.classList.remove("three");
-          let id = `scheda${a.id}`;
-          let newModal = document.querySelector(`[${id}]`);
-          newModal.classList.add("three");
-        })
-      }
-    });
-    next.forEach((b, i) => {
-      if(!b.classList.contains("disabled")){
-        b.addEventListener("click", function(){
-          let oldModal = document.querySelector(".three");
-          oldModal.classList.remove("three");
-          let id = `scheda${b.id}`;
-          let newModal = document.querySelector(`[${id}]`);
-          newModal.classList.remove("out");
-          newModal.classList.add("three");
-        })
-      }
-    });
-    close.forEach((c, i) => {
-      c.addEventListener("click",function(){
-        let oldModal = document.querySelector(".three");
-        oldModal.classList.remove("three");
-        body.style.overflow = "auto"
-      })
-    });
-
-});

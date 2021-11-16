@@ -62,6 +62,7 @@ $page-width: 5vw;
 $main-title: 48px;
 $title: 42px;
 $text-small: 16px;
+$text-supersmall: 14px;
 $text: 20px;
 $quote: 28px;
 $maxW: 1300px;
@@ -121,6 +122,9 @@ body{
   &.modal-active {
     overflow: hidden;
   }
+  &.open{
+    overflow: hidden;
+  }
 }
 .page-width{
   padding: 0 $page-width;
@@ -128,11 +132,117 @@ body{
 
 // desktop
 
+
+// menu
+.menu-full{
+	height: 100vh;
+	width:100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9;
+	opacity: 0;
+	visibility: hidden;
+  background: white;
+	.menu-container{
+		height: 100%;
+		display:flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+    padding: $page-width;
+    .menu-title{
+      color:$red;
+      margin-bottom: $spacing*3;
+      font-weight: 500;
+    }
+    .menu-items-container{
+      .menu-item{
+        display: flex;
+        align-items: center;
+        padding: $spacing;
+        width:400px;
+        min-width: 400px;
+        cursor: pointer;
+        .active{
+          display: none;
+          margin-right: $spacing*2;
+        }
+        .inactive{
+          margin-right: $spacing*2;
+        }
+        .item-text{
+          width:100%;
+          padding: $spacing*2;
+          border:1px solid black;
+          @include shadow;
+          border-radius: 10px;
+          font-weight: 500;
+          h4{font-size: $text-small; color:$red; }
+          h5{font-size: $text-supersmall; color:black; margin-bottom: $spacing;}
+          p{font-size: $text-supersmall; color:$red;}
+        }
+        &.active{
+          .inactive{display: none;}
+          .active{display: block;}
+          .item-text{
+            background: $red;
+            border-color:$red;
+            color:white;
+            h4, h5, p{color:white;}
+          }
+        }
+      }
+    }
+	}
+}
+.toggle-menu{
+  position: fixed;
+  top:90vh;
+  left: 0;
+  z-index: 10;
+  background: $red;
+  padding: $spacing*2 10px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  @include shadow;
+  #menu-btn {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 9999;
+      height: auto;
+      user-select: none;
+      span {
+          width: 35px;
+          height: 2px;
+          background: white;
+          position: relative;
+          display: block;
+          margin: 4px 0;
+          border-radius: 2px;
+          transform: scale(0.8);
+      }
+  }
+}
+
+// hero
+.page-container{
+  background: white;
+  z-index: 2;
+  @include shadow;
+}
+
 .hero{
   display: flex;
+  position: sticky;
+  top:0;
+  z-index: -2;
   height: 100vh;
   background: black;
   transition: background .4s ease;
+  cursor: pointer;
     h6{
       color: white;
     }
@@ -144,10 +254,6 @@ body{
     }
     .sommario{
       color:white;
-    }
-    .cta{
-      color:white;
-      border-bottom-color: $red !important;
     }
   &.red{
     background: $red;
@@ -164,8 +270,8 @@ body{
       color:black;
     }
     .cta{
-      color:white;
-      border-bottom-color: white;
+      color:black;
+      border-bottom:1px solid white !important;
     }
   }
   .hero-left{
@@ -189,7 +295,10 @@ body{
       }
       h1{
         @include main-title;
-        margin-bottom: $spacing*2;
+        &.last{
+          margin-bottom: $spacing*2;
+          margin-left: $spacing*2;
+        }
       }
       .cta{
         margin-top: $spacing*4;
@@ -206,11 +315,29 @@ body{
   }
   .hero-right{
     width:40%;
+    background: #F46940;
+    img{
+      width:100%;
+      height: auto;
+    }
   }
 }
 
 .intro-section{
   height: 100vh;
+  overflow: hidden;
+  .background{
+    position: absolute;
+    height: 100%;
+    width:100%;
+    overflow: hidden;
+    img{
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
   .intro-text-container{
     height: 100%;
     width:80%;
@@ -231,15 +358,77 @@ body{
       border-top-left-radius: 20px;
       background: white;
       margin-bottom: $spacing*2;
+      z-index: 2;
     }
     .intro-sommario{
       padding: $spacing;
       border: 1px solid;
       border-bottom-right-radius: 20px;
       width:80%;
+      background: white;
       font-size: $text-small;
+      z-index: 2;
       p:not(last-child){
         margin-bottom: $spacing*2;
+      }
+    }
+  }
+}
+
+.quote-full{
+  .line{
+    position:absolute;
+    top:50%;
+    width:100%;
+    height: 1px;
+    border-bottom: 1px dotted $red;
+    z-index: -1;
+  }
+  .quote-h1{
+    padding: 0 $page-width;
+    margin: 0 auto;
+    margin-top: $spacing*10;
+    display: flex;
+    max-width: $maxW;
+    position: relative;
+    margin-bottom: $spacing*5;
+    @include title;
+    font-weight: 500;
+
+  }
+  .quote-full-container{
+    position: relative;
+    .text-cont{
+      @include shadow;
+      border-radius: 10px;
+      border: 1px solid black;
+      font-weight: 500;
+      position: relative;
+      margin: 0 calc(5vw + 40px);
+      display: flex;
+      position: relative;
+      background: white;
+      .text-wrap{
+        padding: $spacing*3 $page-width;
+        display: flex;
+        justify-content: flex-end;
+        h4{
+          width:80%;
+        }
+        span{
+          color:$red;
+        }
+      }
+
+      .lf{
+        position: absolute;
+        top:calc(50% - 10px);
+        left: -10px;
+      }
+      .rg{
+        position: absolute;
+        top:calc(50% - 10px);
+        right: -10px;
       }
     }
   }
@@ -251,6 +440,7 @@ body{
     width:100%;
     max-width: $maxW/2;
     margin: 0 auto;
+    position: relative;
     h2{
       @include quote;
       span{color: $red;}
@@ -262,6 +452,19 @@ body{
         margin-bottom: $spacing;
         line-height: 1;
         font-weight: 300;
+        position: relative;
+        width:fit-content;
+        &:after{
+          content: "";
+          width:100%;
+          background: $red;
+          opacity: .5;
+          z-index: -1;
+          position: absolute;
+          height: 10px;
+          bottom: -3px;
+          left: 0;
+        }
         span{
           font-weight: 700;
         }
@@ -272,6 +475,21 @@ body{
         font-size: $text-small;
       }
 
+    }
+    .quote-svg{
+      position: absolute;
+      left: -60px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width:35px;
+      .verticl-line{
+        height: calc(100% - 60px);
+        width:1px;
+        margin: 0 auto;
+        margin-top: $spacing;
+        background: black;
+      }
     }
   }
 }
@@ -284,25 +502,48 @@ body{
   max-width: $maxW;
   &.left{
     flex-direction:row-reverse;
+    .col-image{
+      padding-right: 0;
+      padding-left: $page-width;
+    }
   }
   .col-image{
     width:40%;
+    padding-right: $page-width;
+    img{
+      width: 100%;
+      height: auto;
+    }
   }
   .col-text{
-    @include shadow;
     width:60%;
     .text-container{
       padding: $spacing*3;
       border: 1px solid black;
       border-bottom-left-radius: 20px;
+      @include shadow;
+    }
+  }
+}
 
+.single-image{
+  padding: 0 $page-width;
+  margin: 0 auto;
+  margin-top: $spacing*5;
+  margin-bottom: $spacing*10;
+  display: flex;
+  max-width: $maxW;
+  .single-image-container{
+    img{
+      width:100%;
+      height: auto;
     }
   }
 }
 
 .modal-navigation{
   margin-top: $spacing*10;
-  margin-bottom: $spacing*10;
+  padding-bottom: $spacing*10;
   .nav-container{
     padding: 0 $page-width;
     display: flex;
@@ -357,6 +598,11 @@ body{
         font-size: 18px;
         border-top:1px solid black;
         cursor: pointer;
+        &:hover{
+          color:white;
+          background: black;
+        }
+
       }
     }
   }
@@ -378,7 +624,7 @@ body{
   opacity: 0;
   visibility: hidden;
   &.three {
-    z-index:0;
+    z-index:12;
     opacity: 1;
     visibility: visible;
     .modal-background {
