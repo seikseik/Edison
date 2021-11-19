@@ -66,6 +66,13 @@ $text-supersmall: 14px;
 $text: 20px;
 $quote: 28px;
 $maxW: 1300px;
+
+$main-title-mobile: 28px;
+$text-small-mobile: 12px;
+$label-mobile: 10px;
+$text-mobile: 16px;
+
+
 @mixin main-title{
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 700;
@@ -350,6 +357,7 @@ body{
       @include label-intro
       width:fit-content;
       margin-bottom: $spacing*2;
+      z-index: 2;
     }
     .intro-title{
       @include title;
@@ -500,11 +508,33 @@ body{
   margin-top: $spacing*10;
   display: flex;
   max-width: $maxW;
+  &.margin-top{
+    .col-image{
+      margin-top: $spacing*6;
+    }
+  }
+  &.margin-top-double{
+    .col-image{
+      margin-top: $spacing*12;
+    }
+  }
   &.left{
     flex-direction:row-reverse;
     .col-image{
       padding-right: 0;
       padding-left: $page-width;
+    }
+  }
+  &.double-section{
+    .col-text{
+      .text-container:last-child{
+        margin-top: $spacing*6;
+      }
+    }
+    .col-image{
+      img{
+        margin-top: $spacing*12;
+      }
     }
   }
   .col-image{
@@ -513,6 +543,44 @@ body{
     img{
       width: 100%;
       height: auto;
+    }
+    &.text-image{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      width:40%;
+      .text-image-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .card-container{
+        border:1px solid black;
+        @include shadow;
+        padding: $spacing*2 $spacing*3;
+        .label{
+          font-size: 10px;
+          border: 1px solid $red;
+          width:fit-content;
+          letter-spacing: 1px;
+          color: $red;
+          padding: 3px $spacing;
+          text-transform: uppercase;
+          font-weight: 600;
+        }
+        h4{
+          font-size: 24px;
+          margin: $spacing*2 0;
+          text-decoration: underline;
+          color:$red;
+          font-weight: bold;
+        }
+        p{
+          font-size: $text-small;
+          font-weight: 500;
+        }
+      }
     }
   }
   .col-text{
@@ -877,6 +945,13 @@ footer{
 
 
 @media only screen and (max-width: 768px) {
+  .mobile, .mobile-small{display: flex !important;}
+  .desktop, .desktop-small{display: none !important;}
+
+
+  body{
+    font-size: 16px;
+  }
 
 .modal-navigation{
   .nav-container{
@@ -887,7 +962,25 @@ footer{
   .hero-right{display: none;}
   .hero-left{
     width:100%;
+    .hero-container{
+      h1{
+        font-size: $main-title-mobile;
+        &.last{margin-left: 0px;}
+      }
+      h6{
+        font-size: $text-small-mobile;
+      }
+      .cta{
+        color:white;
+      }
+      .sommario{
+        font-size: $text-small-mobile;
+      }
+    }
   }
+}
+.toggle-menu{
+  top:85vh;
 }
 
 .intro-section{
@@ -896,17 +989,54 @@ footer{
     padding: 0 $page-width;
     .intro-sommario{
       width:100%;
+      font-size: $text-small-mobile;
+    }
+    .intro-title{
+      font-size: $text-mobile;
+    }
+  }
+}
+.quote-module{
+  margin-top: $spacing*6;
+  .quote-container{
+    padding: 0 $page-width;
+    padding-left: $page-width*4;
+    h2{
+      font-size: $text-mobile;
+      line-height: 1.6;
+    }
+    .author{
+      h4{
+        font-size: 24px;
+      }
+    }
+    .quote-svg{
+      left: 20px;
+      top:20px;
+      height: calc(100% - 20px);
     }
   }
 }
 
 .text-section{
+  margin-top: $spacing*6;
   flex-direction: column;
   &.right{
     flex-direction: column-reverse;
   }
+  &.left{
+    flex-direction: column-reverse;
+    .col-image{
+      padding: 0;
+    }
+  }
   .col-image{
     width:100%;
+    margin-top: $spacing*6;
+    padding: 0;
+    &.empty{
+      margin-top: 0;
+    }
   }
   .col-text{
     width:100%;
@@ -914,6 +1044,108 @@ footer{
       box-shadow: none;
       border: none;
       padding: 0;
+    }
+  }
+}
+
+.quote-full{
+  .quote-h1{
+    font-size: $main-title-mobile;
+    margin: $spacing*6 0;
+  }
+  .quote-full-container{
+    .text-cont{
+      margin: 0 $page-width;
+      .text-wrap{
+        padding: $spacing*2 $spacing*4;
+        h4{
+          width:100%;
+        }
+      }
+    }
+  }
+}
+
+.modal-navigation{
+  margin: $spacing*6 0;
+  padding-bottom: 0;
+  .nav-container{
+    .card{
+      margin: 0;
+      &:first-child{
+        margin-bottom: $spacing*3;
+        margin-right: 0;
+      }
+      &:last-child{
+        margin-left: 0;
+      }
+      .text-info{
+        width:70%;
+        h2{
+          font-size: $main-title-mobile;
+        }
+      }
+      .btn{
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.menu-full{
+  overflow: scroll;
+  .menu-container{
+    height: auto;
+    align-items:flex-start;
+    .menu-title{
+      font-size: 21px;
+    }
+    .menu-items-container{
+      .menu-item{
+        width:100%;
+        min-width: unset;
+        .item-text{
+          p{
+            font-size: $text-small-mobile;
+          }
+          h4{
+            font-size: 14px;
+          }
+          h5{
+            font-size: $text-small-mobile;
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal-container{
+  .modal-background{
+    .modal{
+      .modal-hero{
+        width: 100%;
+        p{font-size: $text-small-mobile;}
+        margin-bottom: 0;
+      }
+      .text-section-hero{
+        flex-direction: column;
+        .col-text{
+          margin-top: $spacing*6;
+          width:100%;
+        }
+        .col-image{
+          margin-top: $spacing*6;
+          width: 100%;
+          padding-top: 0;
+        }
+        &.right{
+          flex-direction: column-reverse;
+          .col-text{
+            margin-left: 0;
+          }
+        }
+      }
     }
   }
 }

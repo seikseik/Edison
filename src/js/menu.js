@@ -85,7 +85,7 @@ item.addEventListener("click", function(){
 // scroll active
 
 
-let introSections = document.querySelectorAll(".intro-section");
+let introSections = document.querySelectorAll(".scroll");
 console.log(introSections)
 introSections.forEach((item, i) => {
   ScrollTrigger.create({
