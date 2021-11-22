@@ -7,9 +7,6 @@ import Typed from 'typed.js';
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 
 
-
-
-
 // let h = document.querySelector(".hero").offsetHeight;
 // let topArrow = document.querySelector(".hero");
 // topArrow.addEventListener("click", function(){
