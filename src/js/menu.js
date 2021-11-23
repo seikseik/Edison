@@ -86,7 +86,6 @@ item.addEventListener("click", function(){
 
 
 let introSections = document.querySelectorAll(".scroll");
-console.log(introSections)
 introSections.forEach((item, i) => {
   ScrollTrigger.create({
     trigger: item,
