@@ -395,7 +395,7 @@ body{
   .quote-h1{
     padding: 0 $page-width;
     margin: 0 auto;
-    margin-top: $spacing*10;
+    margin-top: $spacing*15;
     display: flex;
     max-width: $maxW;
     position: relative;
@@ -534,7 +534,7 @@ body{
 .text-section{
   padding: 0 $page-width;
   margin: 0 auto;
-  margin-top: $spacing*10;
+  margin-top: $spacing*15;
   display: flex;
   max-width: $maxW;
 
@@ -642,7 +642,7 @@ body{
 }
 
 .modal-navigation{
-  margin-top: $spacing*10;
+  margin-top: $spacing*15;
   padding-bottom: $spacing*10;
   .nav-container{
     padding: 0 $page-width;
@@ -780,7 +780,7 @@ body{
       }
       .text-section-hero{
         display: flex;
-        margin-bottom: $spacing*10;
+        margin-bottom: $spacing*15;
       &.right{
         flex-direction: row-reverse;
         .col-text{
@@ -1079,6 +1079,19 @@ footer{
       padding: 0;
     }
   }
+  &.margin-top-double{
+    .col-image{
+      margin-top: $spacing*6;
+    }
+  }
+  &.double-section{
+    .col-image{
+      margin-top: 0;
+      .caption{
+        margin-top: $spacing*6;
+      }
+    }
+  }
   .col-image{
     width:100%;
     margin-top: $spacing*6;
@@ -1182,8 +1195,9 @@ footer{
       }
       .text-section-hero{
         flex-direction: column;
+        margin-bottom: 0;
         .col-text{
-          margin-top: $spacing*6;
+          margin-top: $spacing*2;
           width:100%;
         }
         .col-image{
@@ -1201,5 +1215,20 @@ footer{
     }
   }
 }
+
+nav .nav-container{
+  padding: $spacing $spacing*2;
+  .close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .prev,.next{
+    div{
+      font-size: 12px;
+    }
+  }
+}
+
 
 }
