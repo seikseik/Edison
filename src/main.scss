@@ -1170,6 +1170,13 @@ footer{
     }
     &.text-image{
       width:100%;
+      .card-container{
+        box-shadow: none;
+        padding: $spacing*3 0;
+        border:none;
+        border-bottom: 1px dashed black;
+        border-top: 1px dashed black;
+      }
     }
   }
   .col-text{
@@ -1180,7 +1187,9 @@ footer{
       padding: 0;
     }
   }
+
 }
+
 
 .quote-full{
   .quote-h1{
