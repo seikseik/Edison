@@ -112,8 +112,8 @@ $text-mobile: 16px;
   font-weight: 600;
   font-size: 10px;
   color: white;
-  background: $red;
-  padding: 4px;
+  background: black;
+  padding: 4px $spacing*2;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -301,21 +301,39 @@ body{
         font-size: $text-small;
       }
       h1{
-        @include main-title;
+        font-size: 70px;
+        color:white;
+        line-height: 1.1;
+        font-weight: 700;
         &.last{
           margin-bottom: $spacing*2;
           margin-left: $spacing*2;
         }
       }
-      .cta{
-        margin-top: $spacing*4;
-        padding-bottom: $spacing/2;
-        border-bottom: 2px solid;
-        width:fit-content;
-        align-self: flex-end;
-        font-size: $text-small;
-        span{
-          font-weight: 600;
+      .hero-links{
+        margin-top:$spacing*4;
+        display:grid;
+        grid-template-columns: 1fr  1fr;
+        grid-template-rows:1fr  1fr;
+        grid-column-gap: $spacing*2;
+        grid-row-gap: $spacing*2;
+        width:400px;
+        .link-cont{
+          border:1px solid white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color:white;
+          font-size:14px;
+          font-weight: 500;
+          border-top-right-radius: 15px;
+          height: 150px;
+          cursor: pointer;
+          padding: $spacing*2;
+          &:active, &:hover{
+            background: white;
+            color:$red;
+          }
         }
       }
     }
@@ -356,11 +374,14 @@ body{
     .label{
       @include label-intro
       width:fit-content;
-      margin-bottom: $spacing*2;
+      background: black;
+      margin-top: $spacing*2;
       z-index: 2;
+      padding: 5px 30px;
     }
     .intro-title{
       @include title;
+      font-weight: normal;
       padding: $spacing*3 $spacing*2;
       border: 1px solid $red;
       border-top-left-radius: 20px;
@@ -369,15 +390,30 @@ body{
       z-index: 2;
     }
     .intro-sommario{
-      padding: $spacing;
+      padding: $spacing*3 $spacing*2;
       border: 1px solid;
       border-bottom-right-radius: 20px;
       width:80%;
-      background: white;
+      background: $red;
       font-size: $text-small;
+      font-weight: 500;
       z-index: 2;
+      color:white;
       p:not(last-child){
         margin-bottom: $spacing*2;
+      }
+    }
+    .social-container{
+      margin-top: $spacing*2;
+      display: flex;
+      align-items: center;
+      border:1px solid $red;
+      background: white;
+      padding: $spacing*2 $spacing*3;
+      z-index: 1;
+      width:fit-content;
+      a:nth-child(2){
+        margin: 0 $spacing*2;
       }
     }
   }
@@ -509,21 +545,21 @@ body{
 .col-image, .single-image{
   .caption{
     display: flex;
-    width:80%;
+    width:90%;
     img{
       margin-right: $spacing*2;
       width:30px !important;
       height: auto;
     }
     .cap-text{
-      font-size: 14px;
+      font-size: 16px;
       color:$red;
       font-weight: 500;
       border: 1px solid black;
       border-radius: 5px;
       border-top-right-radius: 20px;
       margin-bottom: $spacing*2;
-      padding: $spacing;
+      padding: $spacing*2;
     }
   }
 }
@@ -630,7 +666,20 @@ body{
       padding: $spacing*3;
       border: 1px solid black;
       border-bottom-left-radius: 20px;
+      border-top: 3px solid $red !important;
       @include shadow;
+      position: relative;
+      &:after{
+        content: " ";
+        position: absolute;
+        bottom:0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        background: $red;
+        border-top:1px solid black;
+        border-left: 1px solid black;
+      }
     }
   }
 }
@@ -796,19 +845,31 @@ body{
         flex-direction: row-reverse;
         .col-text{
           margin-right: 0;
-          margin-left: $spacing*2;
+          margin-left: $spacing*3;
         }
       }
         .col-text{
           width:60%;
+          position: relative;
           background: white;
           padding: $spacing*5 $spacing*3;
           padding-bottom: $spacing*4;
-          border-top-right-radius: 20px;
+          border-bottom-left-radius: 20px;
           @include shadow;
           border:1px solid black;
+          border-top:3px solid black;
           max-width: 800px;
-          margin-right: $spacing*2;
+          margin-right: $spacing*3;
+          height: fit-content;
+          &:after{
+            content: " ";
+            position: absolute;
+            bottom:0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: black;
+          }
         }
         .col-image{
           width:40%;
@@ -828,16 +889,17 @@ body{
               color:red;
               font-size: $text-small;
               font-weight: 500;
-              margin-left: $spacing*2;
             }
           }
           .image-container{
             height: 100%;
+            display: flex;
+            justify-content: flex-start;
             width:100%;
-            background: white;
-            @include shadow;
-            border: 1px solid black;
-            margin-top: $spacing*2;
+            img{
+              width:90%;
+              height: auto;
+            }
           }
         }
       }

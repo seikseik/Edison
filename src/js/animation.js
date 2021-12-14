@@ -48,19 +48,19 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 
 
   // type
-  let hero = document.querySelector(".hero")
-  let options = {
-    strings: ["è quì",
-   "è in mezzo a noi"],
-  	typeSpeed: 50,
-  	startDelay: 300,
-  	backSpeed: 30,
-  	backDelay: 2000,
-  	loop: true,
-  	showCursor: false,
-  };
-
-  let typed = new Typed('.type', options);
+  // let hero = document.querySelector(".hero")
+  // let options = {
+  //   strings: ["è quì",
+  //  "è in mezzo a noi"],
+  // 	typeSpeed: 50,
+  // 	startDelay: 300,
+  // 	backSpeed: 30,
+  // 	backDelay: 2000,
+  // 	loop: true,
+  // 	showCursor: false,
+  // };
+  //
+  // let typed = new Typed('.type', options);
 
   // modale
   let buttons = document.querySelectorAll(".modal-btn");
