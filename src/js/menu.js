@@ -45,18 +45,16 @@ menuBtn.addEventListener("click", () => {
         flag = !flag;
         if (flag) {
             menu.visibility = "visible";
-            gsap.fromTo(menu,{autoAlpha: 0},{  duration: 0.25, autoAlpha: 1, ease: "circ.out"});
-
-            gsap.fromTo(menuItems,{autoAlpha: 0},{  duration: 0.3, autoAlpha: 1, stagger: 0.1, delay: 0.15});
-
+            gsap.fromTo(menu,{autoAlpha: 0},{  duration: 0.2, autoAlpha: 1, ease: "circ.out"});
+            gsap.fromTo(menuItems,{autoAlpha: 0},{  duration: 0.25, autoAlpha: 1, stagger: 0.09, delay: 0.1});
             body.style.overflowY = "hidden"
             burger.restart();
         } else {
             let tl = gsap.timeline({
                 paused: true
               });
-              tl.fromTo(menuItems,{autoAlpha: 1},{  duration: 0.2, autoAlpha: 0 ,stagger: -0.1, delay: 0.1});
-              tl.fromTo(menu,{autoAlpha: 1},{  duration: 0.4, autoAlpha: 0, ease: "circ.out", delay: 0.2});
+              tl.fromTo(menuItems,{autoAlpha: 1},{  duration: 0.1, autoAlpha: 0 ,stagger: -0.1, delay: 0.1});
+              tl.fromTo(menu,{autoAlpha: 1},{  duration: 0.2, autoAlpha: 0, ease: "circ.out", delay: 0.1});
               tl.set(menu, {visibility: "hidden"});
               tl.restart();
               body.style.overflowY = "scroll";
@@ -70,8 +68,8 @@ item.addEventListener("click", function(){
   let tl = gsap.timeline({
       paused: true
     });
-    tl.fromTo(menuItems,{autoAlpha: 1},{  duration: 0.2, autoAlpha: 0 ,stagger: -0.1, delay: 0.1});
-    tl.fromTo(menu,{autoAlpha: 1},{  duration: 0.4, autoAlpha: 0, ease: "circ.out", delay: 0.2});
+    tl.fromTo(menuItems,{autoAlpha: 1},{  duration: 0.1, autoAlpha: 0 ,stagger: -0.06, delay: 0.1});
+    tl.fromTo(menu,{autoAlpha: 1},{  duration: 0.1, autoAlpha: 0, ease: "circ.out", delay: 0.1});
     tl.set(menu, {visibility: "hidden"});
     tl.restart();
     body.style.overflowY = "scroll";
@@ -83,7 +81,6 @@ item.addEventListener("click", function(){
 
 
 // scroll active
-
 
 let introSections = document.querySelectorAll(".scroll");
 introSections.forEach((item, i) => {
@@ -113,4 +110,24 @@ introSections.forEach((item, i) => {
       });
     }
   });
+});
+
+// scroll hero
+
+let heroLinks = document.querySelectorAll(".link-cont");
+heroLinks.forEach((item, i) => {
+  item.addEventListener("click", function(){
+    if(item.id == 1){
+      gsap.to(window, {duration: 0.5, scrollTo: "#section-1"});
+    }
+    if(item.id == 2){
+      gsap.to(window, {duration: 1, scrollTo: "#section-2"});
+    }
+    if(item.id == 3){
+      gsap.to(window, {duration: 1.5, scrollTo: "#section-3"});
+    }
+    if(item.id == 4){
+      gsap.to(window, {duration: 1.5, scrollTo: "#section-4"});
+    }
+  })
 });
