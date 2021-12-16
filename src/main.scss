@@ -1303,9 +1303,7 @@ footer{
   .desktop, .desktop-small{display: none !important;}
 
 
-  body{
-    font-size: 16px;
-  }
+  body{font-size: 16px;}
 
 .modal-navigation{
   .nav-container{
@@ -1334,6 +1332,10 @@ footer{
       .sommario{
         font-size: $text-small-mobile;
       }
+      .hero-links{
+        width:auto;
+        height: auto;
+      }
     }
   }
 }
@@ -1351,6 +1353,8 @@ footer{
     }
     .intro-title{
       font-size: $text-mobile;
+      font-weight: 500;
+      margin-bottom: 0;
     }
   }
 }
@@ -1378,6 +1382,21 @@ footer{
 .text-section{
   margin-top: $spacing*6;
   flex-direction: column;
+  &.quote{
+    margin-bottom: 0;
+    .quote-container{
+      padding: $spacing*2;
+      h2{
+        font-size: 20px;
+        padding-left: 50px;
+        margin-bottom: $spacing*2;
+      }
+      .author{
+        span, h4{font-size: 20px;}
+        padding-left: 50px;
+      }
+    }
+  }
   &.right{
     flex-direction: column-reverse;
   }
@@ -1426,7 +1445,20 @@ footer{
       padding: 0;
     }
   }
+}
+.text-section .col-text .text-container{
+  border-top:none !important;
+}
+.text-section .col-text .text-container:after{
+  content: none;
+}
 
+.single-image.double{
+  margin-bottom: $spacing*3;
+  .single-image-container .image-double-cont{
+    flex-direction: column;
+    img:first-child{margin-bottom: $spacing*2;}
+  }
 }
 
 
@@ -1434,6 +1466,7 @@ footer{
   .quote-h1{
     font-size: $main-title-mobile;
     margin: $spacing*6 0;
+    margin-bottom: $spacing*3;
   }
   .quote-full-container{
     .text-cont{
@@ -1514,14 +1547,20 @@ footer{
 .modal-container{
   .modal-background{
     .modal{
+      padding-bottom: $spacing*10;
       .modal-hero{
         width: 100%;
-        p{font-size: $text-small-mobile;}
+        p{font-size: 16px;}
         margin-bottom: 0;
+        h1{
+          font-size: 32px;
+        }
       }
       .text-section-hero{
         flex-direction: column;
         margin-bottom: 0;
+        margin-top: 0;
+        padding: 0;
         .col-text{
           margin-top: $spacing*2;
           width:100%;
@@ -1537,10 +1576,20 @@ footer{
             margin-left: 0;
           }
         }
+        &.single-image-container{
+          margin: $spacing*5 0;
+          .cap-text{
+            width:80%;
+          }
+        }
       }
     }
   }
 }
+.modal-container .modal-background .modal .text-section-hero .col-image .image-container img{
+  width:100%;
+}
+
 
 nav .nav-container{
   padding: $spacing*2;
